@@ -1,17 +1,33 @@
->**Note**: Please **fork** the current Udacity repository so that you will have a **remote** repository in **your** Github account. Clone the remote repository to your local machine. Later, as a part of the project "Post your Work on Github", you will push your proposed changes to the remote repository in your Github account.
+### 04.07.2023 
 
-### Date created
-Include the date you created this project and README file.
+# <center> BikeShare <center>
 
-### Project Title
-Replace the Project Title
+Bikeshare is an interactive script that reads the data for city bike usage in Chicago, New York and Washington and calculates some statistics.<br>
+Depending on the user's preferences, the data is first filtered by city and day of the week or month. Then the most frequent travel times, most frequently used stations and connections, the usual travel duration and characteristics of the users are determined.
 
-### Description
-Describe what your project is about and what it does
+### Installation:
+Clone the GitHub repository:
+```
+git clone https://github.com/LeaMeissner/pdsnd_github.git
+cd pdsnd_github
+```
 
-### Files used
-Include the files used
+Install required packages:
+```
+pip install numpy
+pip install pandas
+pip install cdifflib
+```
+
+### Files used:
+```
+chicago.csv
+nes_york_city.csv
+wahington.csv
+```
+
+### Usage:
+Follow the instructions of the interactive script to read in the city and, if desired, a day of the week or month.
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
-
+The basic framework of bikeshare.py as well as the function main() was provided by Udacity.
