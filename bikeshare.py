@@ -277,18 +277,23 @@ def print_trip_data(data):
             go_on = False
 
 def main():
-    while True:
-        
+    while True: 
+        # select the filters interactively:
         city, month, day = get_filters()
 
+        # read and filter the data:
         data = load_data(city, month, day)
 
+        # calculate all statistics:
         time_stats(data, month, day)
         station_stats(data)
         trip_duration_stats(data)
         user_stats(data, city)
+
+        # output the data section by section:
         print_trip_data(data)
 
+        # restart the interactive script if desired:
         restart = input('\nWould you like to restart? Enter yes or no.\n').lower() 
         if restart != 'yes':
             break
