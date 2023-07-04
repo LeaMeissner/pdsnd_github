@@ -1,7 +1,7 @@
-import time
-import pandas as pd
-import numpy as np
-from datetime import date # library to handle dates
+import time                         # library to measure the runtime of the functions 
+import pandas as pd                 # library for handling data frames
+import numpy as np                  # library to use mathematical operations on arrays
+from datetime import date           # library to handle dates
 from difflib import SequenceMatcher # library to compare sequences of characters
 
 # dictionary CITY_DATA that assigns corresponding files to the cities.
