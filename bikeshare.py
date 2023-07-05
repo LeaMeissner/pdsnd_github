@@ -48,7 +48,8 @@ def get_filters():
             filter = input('\nWould you like to filter the data by month, day, both or not at all? Type "none" for no time filter.\n').lower()
 
             # repeat the input for the filter if it does not match any allowed filters, otherwise continue
-            if filter != 'month' and filter != 'day' and filter != 'both' and filter != 'none':
+            possible_filters = ['month', 'day', 'both', 'none']
+            if filter not in possible_filters: # != 'month' and filter != 'day' and filter != 'both' and filter != 'none':
                 print('No valid input for the filter!')
             else:
                 break 
@@ -59,7 +60,8 @@ def get_filters():
                 month = input('\nWhich month - January, February, March, April, May, or June?\n').lower()
 
                 # repeat the input for the month if it does not match any allowed months, otherwise continue
-                if month != 'january' and month != 'february' and month != 'march' and month != 'april' and month != 'may' and month != 'june':
+                possible_months = ['january','february','march','april','may','june']
+                if month not in possible_months:
                     print('No valid input for the month!')
                 else:
                     break
@@ -72,7 +74,8 @@ def get_filters():
                 day = input('\nWhich day - Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday?\n').lower()
 
                 # repeat the input for the day if it does not match any days of the week, otherwise continue
-                if day != 'monday' and day != 'tuesday' and day != 'wednesday' and day != 'thursday' and day != 'friday' and day != 'saturday' and day != 'sunday':
+                possible_days = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday']
+                if day not in possible_days:
                     print('No valid input for the day!')
                 else:
                     break
