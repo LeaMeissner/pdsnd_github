@@ -14,8 +14,8 @@ def get_filters():
     Function that asks user to specify a city, month and day to analyze. 
     output: 
         city (str): name of the city (chicago, new york city or washington) to analyze
-        month (str): name of the month (january, february, march, april, may or june) to filter by, or "all" to apply no month filter
-        day (str): name of the day of week (monday, tuesday, wednesday, thursday, friday, saturday or sunday) to filter by, or "all" to apply no day filter  
+        month (str): name of the month (january, february, march, april, may or june) to filter by, or "all months" to apply no month filter
+        day (str): name of the day of week (monday, tuesday, wednesday, thursday, friday, saturday or sunday) to filter by, or "all days" to apply no day filter  
     """
 
     print('Hello! Let\'s explore some US bikeshare data!')
@@ -84,12 +84,6 @@ def get_filters():
 
         restart = input('\nYou selected to look at {} data in {} and on {}. Is that correct? Enter yes or no.\n'.format(city.title(), month, day))
         
-        if month == 'all months':
-            month = 'all'
-        
-        if day == 'all days':
-            day = 'all'
-        
         if restart.lower() == 'yes':
             break # continue when the input matches the desired input 
 
@@ -102,8 +96,8 @@ def load_data(city, month, day):
     Loads data for the specified city and filters by month and day if applicable.
     input: 
         city (str): name of the city (chicago, new york or washington) to analyze
-        month (str): name of the month (january, february, march, april, may or june) to filter by, or "all" to apply no month filter
-        day (str): name of the day of week (monday, tuesday, wednesday, thursday, friday, saturday or sunday) to filter by, or "all" to apply no day filter
+        month (str): name of the month (january, february, march, april, may or june) to filter by, or "all months" to apply no month filter
+        day (str): name of the day of week (monday, tuesday, wednesday, thursday, friday, saturday or sunday) to filter by, or "all days" to apply no day filter
     output: 
         data (Pandas DataFrame): DataFrame containing city data filtered by month and day
     """
@@ -125,11 +119,11 @@ def load_data(city, month, day):
     data['Hour'] = pd.to_datetime(data['Start Time']).apply(lambda x: x.strftime("%H"))
     
     # filter data by month:
-    if month != 'all':
+    if month != 'all months':
         data = data[data['Month'] == month.title()] 
 
     # filter data by day:
-    if day != 'all':
+    if day != 'all days':
         data = data[data['Weekday'] == day.title()] 
 
     # reset the index of the data frame
@@ -145,21 +139,21 @@ def time_stats(data, month, day):
     Displays statistics on the most frequent times of travel.
     input: 
         data (Pandas DataFrame): DataFrame containing city data filtered by month and day
-        month (str): name of the month by which the data was filtered or "all" if no month filter was applied
-        day (str): name of the day of week by which the data was filtered or "all" if no month filter was applied
+        month (str): name of the month by which the data was filtered or "all months" if no month filter was applied
+        day (str): name of the day of week by which the data was filtered or "all days" if no month filter was applied
     """
     
     print('\nCalculating The Most Frequent Times of Travel ...')
     start_time = time.time()
 
     # display the most common month
-    if month == 'all': 
+    if month == 'all months': 
         most_common_month = data['Month'].value_counts().idxmax() # counts how often a month appears and selects the most frequent 
         most_common_month_count = data['Month'].value_counts().max() # number of times the the most frequent month appears
         print('   - Most popular month for traveling: {}, Count: {}'.format(most_common_month, most_common_month_count))
 
     # display the most common day of week
-    if day == 'all':
+    if day == 'all days':
         most_common_weekday = data['Weekday'].value_counts().idxmax() # counts how often a weekday appears and selects the most frequent 
         most_common_weekday_count = data['Weekday'].value_counts().max() # number of times the the most frequent weekday appears
         print('   - Most popular day of week for traveling: {}, Count: {}'.format(most_common_weekday, most_common_weekday_count))
