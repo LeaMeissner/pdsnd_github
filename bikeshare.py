@@ -50,7 +50,17 @@ def get_filters():
             # repeat the input for the filter if it does not match any allowed filters, otherwise continue
             possible_filters = ['month', 'day', 'both', 'none']
             if filter not in possible_filters: # != 'month' and filter != 'day' and filter != 'both' and filter != 'none':
-                print('No valid input for the filter!')
+                # handle unexpected input:
+                similarity  = np.array([SequenceMatcher(None, filter,  filter_candidate).ratio() for filter_candidate in possible_filters])
+                candidate_similarity = np.max(similarity)
+                filter_candidate = possible_filters[np.argmax(similarity)]
+                if candidate_similarity < 0.6: # if similarity is below 0.6 request a new input
+                    print('No valid input for the filter!')
+                else: # otherwise ask if the filter_candidate was meant by the input
+                    right_input = input('\nNo valid input for the filter! Do you mean "{0}"? This filter has a {1:.3g}% match with the input. Enter yes or no.\n'.format(filter_candidate.title(), candidate_similarity*100)).lower() 
+                    if right_input.lower() == 'yes':
+                        filter = filter_candidate # then set the filter as the filter_candidate
+                        break 
             else:
                 break 
         
@@ -62,7 +72,17 @@ def get_filters():
                 # repeat the input for the month if it does not match any allowed months, otherwise continue
                 possible_months = ['january','february','march','april','may','june']
                 if month not in possible_months:
-                    print('No valid input for the month!')
+                    # handle unexpected input:
+                    similarity  = np.array([SequenceMatcher(None, month,  month_candidate).ratio() for month_candidate in possible_months])
+                    candidate_similarity = np.max(similarity)
+                    month_candidate = possible_months[np.argmax(similarity)]
+                    if candidate_similarity < 0.6: # if similarity is below 0.6 request a new input
+                        print('No valid input for the month!')
+                    else: # otherwise ask if the month_candidate was meant by the input
+                        right_input = input('\nNo valid input for the month! Do you mean "{0}"? This month has a {1:.3g}% match with the input. Enter yes or no.\n'.format(month_candidate.title(), candidate_similarity*100)).lower() 
+                        if right_input.lower() == 'yes':
+                            month = month_candidate # then set the month as the month_candidate
+                            break 
                 else:
                     break
         else: # if you do not want to filter by month, set month to 'all months'
@@ -76,7 +96,17 @@ def get_filters():
                 # repeat the input for the day if it does not match any days of the week, otherwise continue
                 possible_days = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday']
                 if day not in possible_days:
-                    print('No valid input for the day!')
+                    # handle unexpected input:
+                    similarity  = np.array([SequenceMatcher(None, day,  day_candidate).ratio() for day_candidate in possible_days])
+                    candidate_similarity = np.max(similarity)
+                    day_candidate = possible_days[np.argmax(similarity)]
+                    if candidate_similarity < 0.7: # if similarity is below 0.6 request a new input
+                        print('No valid input for the day!')
+                    else: # otherwise ask if the day_candidate was meant by the input
+                        right_input = input('\nNo valid input for the day! Do you mean "{0}"? This day has a {1:.3g}% match with the input. Enter yes or no.\n'.format(day_candidate.title(), candidate_similarity*100)).lower() 
+                        if right_input.lower() == 'yes':
+                            day = day_candidate # then set the day as the day_candidate
+                            break 
                 else:
                     break
         else: # if you do not want to filter by day, set day to 'all days'
